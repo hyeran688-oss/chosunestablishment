@@ -17,11 +17,7 @@
       --pink-text: #721c24;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Nanum Gothic', 'Malgun Gothic', sans-serif;
@@ -34,7 +30,6 @@
       color: var(--chalk-white);
     }
 
-    /* 칠판 틀 레일 디자인 */
     .board-container {
       flex: 1;
       background-color: var(--board-bg);
@@ -47,7 +42,6 @@
       overflow: hidden;
     }
 
-    /* 상단 헤더 영역 */
     header {
       display: flex;
       justify-content: space-between;
@@ -81,12 +75,8 @@
       transition: all 0.2s ease;
     }
 
-    .btn-add:hover {
-      background-color: #e67e22;
-      transform: translateY(-2px);
-    }
+    .btn-add:hover { background-color: #e67e22; transform: translateY(-2px); }
 
-    /* 메인 3컬럼 가로 레이아웃 */
     main {
       flex: 1;
       display: grid;
@@ -133,7 +123,6 @@
     .stat-green { color: #55efc4; font-weight: bold; }
     .stat-pink { color: #ff7675; font-weight: bold; }
 
-    /* 의견 영역 (찬성/반대 가로 split) */
     .opinion-split {
       flex: 1;
       display: grid;
@@ -174,16 +163,9 @@
       padding-right: 4px;
     }
 
-    /* 커스텀 스크롤바 */
-    .sticky-container::-webkit-scrollbar {
-      width: 6px;
-    }
-    .sticky-container::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 3px;
-    }
+    .sticky-container::-webkit-scrollbar { width: 6px; }
+    .sticky-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 3px; }
 
-    /* 포스트잇 스타일 */
     .sticky-note {
       position: relative;
       padding: 10px;
@@ -193,25 +175,10 @@
       word-break: break-all;
       font-size: 0.88rem;
       line-height: 1.35;
-      transition: transform 0.2s ease;
     }
 
-    .sticky-note:hover {
-      transform: scale(1.02);
-      z-index: 10;
-    }
-
-    .sticky-note.agree {
-      background-color: var(--green-note);
-      border: 1px solid var(--green-border);
-      color: var(--green-text);
-    }
-
-    .sticky-note.oppose {
-      background-color: var(--pink-note);
-      border: 1px solid var(--pink-border);
-      color: var(--pink-text);
-    }
+    .sticky-note.agree { background-color: var(--green-note); border: 1px solid var(--green-border); color: var(--green-text); }
+    .sticky-note.oppose { background-color: var(--pink-note); border: 1px solid var(--pink-border); color: var(--pink-text); }
 
     .note-header {
       display: flex;
@@ -224,117 +191,138 @@
       padding-bottom: 2px;
     }
 
-    .note-author {
-      color: #222;
-    }
+    .btn-delete { background: none; border: none; color: #888; cursor: pointer; font-size: 0.8rem; font-weight: bold; }
+    .btn-delete:hover { color: #e74c3c; }
 
-    .btn-delete {
-      background: none;
-      border: none;
-      color: #888;
-      cursor: pointer;
-      font-size: 0.8rem;
-      font-weight: bold;
-      padding: 0 2px;
-    }
-
-    .btn-delete:hover {
-      color: #e74c3c;
-    }
-
-    .note-content {
-      white-space: pre-wrap;
-    }
-
-    /* 모달 레이어 */
     .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 100;
     }
-
-    .modal-overlay.active {
-      display: flex;
-    }
+    .modal-overlay.active { display: flex; }
 
     .modal-card {
-      background: #ffffff;
-      color: #333;
-      width: 420px;
-      max-width: 90%;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      background: #ffffff; color: #333; width: 420px; max-width: 90%;
+      border-radius: 12px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
-
-    .modal-card h2 {
-      margin-bottom: 16px;
-      font-size: 1.3rem;
-      color: #2c3e50;
-      text-align: center;
+    .modal-card h2 { margin-bottom: 16px; font-size: 1.3rem; color: #2c3e50; text-align: center; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px; color: #444; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 9px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95rem; font-family: inherit;
     }
-
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.9rem;
-      font-weight: bold;
-      margin-bottom: 5px;
-      color: #444;
-    }
-
-    .form-group input, 
-    .form-group select, 
-    .form-group textarea {
-      width: 100%;
-      padding: 9px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      font-family: inherit;
-    }
-
-    .form-group textarea {
-      height: 90px;
-      resize: none;
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .btn-cancel {
-      background-color: #95a5a6;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .btn-submit {
-      background-color: #2ecc71;
-      color: white;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+    .form-group textarea { height: 90px; resize: none; }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
+    .btn-cancel { background-color: #95a5a6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
+    .btn-submit { background-color: #2ecc71; color: white; border: none; padding: 8px 18px; border-radius: 6px; cursor: pointer; font-weight: bold; }
   </style>
+
+  <!-- Firebase 및 실시간 데이터베이스 스크립트 -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+    import { getDatabase, ref, push, remove, onValue } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCL0mfecSYrkw1AZZVMyZ3c6qNlz79UBmw",
+      authDomain: "chosunestablishment.firebaseapp.com",
+      projectId: "chosunestablishment",
+      storageBucket: "chosunestablishment.firebasestorage.app",
+      messagingSenderId: "88708631100",
+      appId: "1:88708631100:web:57a2f50efc921c07ae5139",
+      measurementId: "G-ENCBGG859K"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const notesRef = ref(db, 'history_notes');
+
+    window.openModal = function() {
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    window.closeModal = function() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.getElementById('noteForm').reset();
+    }
+
+    window.saveNote = function(e) {
+      e.preventDefault();
+      const author = document.getElementById('author').value.trim();
+      const topic = document.getElementById('topicSelect').value;
+      const opinion = document.getElementById('opinionSelect').value;
+      const content = document.getElementById('content').value.trim();
+
+      if (!author || !content) return;
+
+      push(notesRef, {
+        author,
+        topic,
+        opinion,
+        content,
+        timestamp: Date.now()
+      });
+
+      closeModal();
+    }
+
+    window.deleteNote = function(id) {
+      if (confirm('이 포스트잇을 삭제하시겠습니까?')) {
+        remove(ref(db, `history_notes/${id}`));
+      }
+    }
+
+    // 실시간 데이터 동기화 리스너
+    onValue(notesRef, (snapshot) => {
+      const data = snapshot.val();
+      const notes = [];
+      if (data) {
+        Object.keys(data).forEach(key => {
+          notes.push({ id: key, ...data[key] });
+        });
+      }
+      renderNotes(notes);
+    });
+
+    function renderNotes(notes) {
+      const topics = ['t1', 't2', 't3'];
+      const opinions = ['agree', 'oppose'];
+      const counts = { 't1-agree': 0, 't1-oppose': 0, 't2-agree': 0, 't2-oppose': 0, 't3-agree': 0, 't3-oppose': 0 };
+
+      topics.forEach(t => {
+        opinions.forEach(o => {
+          const container = document.getElementById(`notes-${t}-${o}`);
+          if (container) container.innerHTML = '';
+        });
+      });
+
+      notes.forEach(note => {
+        const key = `${note.topic}-${note.opinion}`;
+        if (counts.hasOwnProperty(key)) counts[key]++;
+
+        const container = document.getElementById(`notes-${key}`);
+        if (container) {
+          const noteEl = document.createElement('div');
+          noteEl.className = `sticky-note ${note.opinion}`;
+          noteEl.innerHTML = `
+            <div class="note-header">
+              <span class="note-author">${escapeHtml(note.author)}</span>
+              <button class="btn-delete" onclick="deleteNote('${note.id}')" title="삭제">✕</button>
+            </div>
+            <div class="note-content">${escapeHtml(note.content)}</div>
+          `;
+          container.appendChild(noteEl);
+        }
+      });
+
+      Object.keys(counts).forEach(key => {
+        const countEl = document.getElementById(`count-${key}`);
+        if (countEl) countEl.textContent = counts[key];
+      });
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
 </head>
 <body>
 
@@ -346,68 +334,47 @@
 
     <main>
       <!-- 주제 1: 요동 정벌 -->
-      <section class="topic-column" id="topic-1">
+      <section class="topic-column">
         <div class="topic-header">
           <div class="topic-title">1. 요동 정벌</div>
           <div class="topic-stats">
-            <span>최영파(찬성): <span class="stat-green" id="count-t1-agree">0</span></span>
-            <span>|</span>
+            <span>최영파(찬성): <span class="stat-green" id="count-t1-agree">0</span></span><span>|</span>
             <span>이성계파(반대): <span class="stat-pink" id="count-t1-oppose">0</span></span>
           </div>
         </div>
         <div class="opinion-split">
-          <div class="opinion-box">
-            <div class="box-label agree">최영파 (찬성 - 연두)</div>
-            <div class="sticky-container" id="notes-t1-agree"></div>
-          </div>
-          <div class="opinion-box">
-            <div class="box-label oppose">이성계파 (반대 - 분홍)</div>
-            <div class="sticky-container" id="notes-t1-oppose"></div>
-          </div>
+          <div class="opinion-box"><div class="box-label agree">최영파 (찬성 - 연두)</div><div class="sticky-container" id="notes-t1-agree"></div></div>
+          <div class="opinion-box"><div class="box-label oppose">이성계파 (반대 - 분홍)</div><div class="sticky-container" id="notes-t1-oppose"></div></div>
         </div>
       </section>
 
       <!-- 주제 2: 위화도 회군 -->
-      <section class="topic-column" id="topic-2">
+      <section class="topic-column">
         <div class="topic-header">
           <div class="topic-title">2. 위화도 회군</div>
           <div class="topic-stats">
-            <span>회군 찬성: <span class="stat-green" id="count-t2-agree">0</span></span>
-            <span>|</span>
+            <span>회군 찬성: <span class="stat-green" id="count-t2-agree">0</span></span><span>|</span>
             <span>회군 반대: <span class="stat-pink" id="count-t2-oppose">0</span></span>
           </div>
         </div>
         <div class="opinion-split">
-          <div class="opinion-box">
-            <div class="box-label agree">회군 찬성 (연두)</div>
-            <div class="sticky-container" id="notes-t2-agree"></div>
-          </div>
-          <div class="opinion-box">
-            <div class="box-label oppose">회군 반대 (분홍)</div>
-            <div class="sticky-container" id="notes-t2-oppose"></div>
-          </div>
+          <div class="opinion-box"><div class="box-label agree">회군 찬성 (연두)</div><div class="sticky-container" id="notes-t2-agree"></div></div>
+          <div class="opinion-box"><div class="box-label oppose">회군 반대 (분홍)</div><div class="sticky-container" id="notes-t2-oppose"></div></div>
         </div>
       </section>
 
       <!-- 주제 3: 조선 건국 -->
-      <section class="topic-column" id="topic-3">
+      <section class="topic-column">
         <div class="topic-header">
           <div class="topic-title">3. 조선 건국</div>
           <div class="topic-stats">
-            <span>정도전파(찬성): <span class="stat-green" id="count-t3-agree">0</span></span>
-            <span>|</span>
+            <span>정도전파(찬성): <span class="stat-green" id="count-t3-agree">0</span></span><span>|</span>
             <span>정몽주파(반대): <span class="stat-pink" id="count-t3-oppose">0</span></span>
           </div>
         </div>
         <div class="opinion-split">
-          <div class="opinion-box">
-            <div class="box-label agree">정도전파 (찬성 - 연두)</div>
-            <div class="sticky-container" id="notes-t3-agree"></div>
-          </div>
-          <div class="opinion-box">
-            <div class="box-label oppose">정몽주파 (반대 - 분홍)</div>
-            <div class="sticky-container" id="notes-t3-oppose"></div>
-          </div>
+          <div class="opinion-box"><div class="box-label agree">정도전파 (찬성 - 연두)</div><div class="sticky-container" id="notes-t3-agree"></div></div>
+          <div class="opinion-box"><div class="box-label oppose">정몽주파 (반대 - 분홍)</div><div class="sticky-container" id="notes-t3-oppose"></div></div>
         </div>
       </section>
     </main>
@@ -448,111 +415,5 @@
       </form>
     </div>
   </div>
-
-  <script>
-    const STORAGE_KEY = 'history_discussion_board_notes';
-    let notes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-
-    function openModal() {
-      document.getElementById('modalOverlay').classList.add('active');
-    }
-
-    function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('active');
-      document.getElementById('noteForm').reset();
-    }
-
-    function saveNote(e) {
-      e.preventDefault();
-      const author = document.getElementById('author').value.trim();
-      const topic = document.getElementById('topicSelect').value;
-      const opinion = document.getElementById('opinionSelect').value;
-      const content = document.getElementById('content').value.trim();
-
-      if (!author || !content) return;
-
-      const newNote = {
-        id: Date.now(),
-        author,
-        topic,
-        opinion,
-        content
-      };
-
-      notes.push(newNote);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-      renderNotes();
-      closeModal();
-    }
-
-    function deleteNote(id) {
-      if (confirm('이 포스트잇을 삭제하시겠습니까?')) {
-        notes = notes.filter(n => n.id !== id);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-        renderNotes();
-      }
-    }
-
-    function renderNotes() {
-      // 카운트 및 영역 초기화
-      const topics = ['t1', 't2', 't3'];
-      const opinions = ['agree', 'oppose'];
-
-      const counts = {
-        't1-agree': 0, 't1-oppose': 0,
-        't2-agree': 0, 't2-oppose': 0,
-        't3-agree': 0, 't3-oppose': 0
-      };
-
-      topics.forEach(t => {
-        opinions.forEach(o => {
-          const container = document.getElementById(`notes-${t}-${o}`);
-          if (container) container.innerHTML = '';
-        });
-      });
-
-      // 포스트잇 렌더링
-      notes.forEach(note => {
-        const key = `${note.topic}-${note.opinion}`;
-        if (counts.hasOwnProperty(key)) {
-          counts[key]++;
-        }
-
-        const container = document.getElementById(`notes-${key}`);
-        if (container) {
-          const noteEl = document.createElement('div');
-          noteEl.className = `sticky-note ${note.opinion}`;
-          noteEl.innerHTML = `
-            <div class="note-header">
-              <span class="note-author">${escapeHtml(note.author)}</span>
-              <button class="btn-delete" onclick="deleteNote(${note.id})" title="삭제">✕</button>
-            </div>
-            <div class="note-content">${escapeHtml(note.content)}</div>
-          `;
-          container.appendChild(noteEl);
-        }
-      });
-
-      // 통계 수치 업데이트
-      Object.keys(counts).forEach(key => {
-        const countEl = document.getElementById(`count-${key}`);
-        if (countEl) {
-          countEl.textContent = counts[key];
-        }
-      });
-    }
-
-    function escapeHtml(str) {
-      return str
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    // 초기 실행
-    document.addEventListener('DOMContentLoaded', renderNotes);
-  </script>
 </body>
 </html>
