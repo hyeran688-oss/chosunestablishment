@@ -218,8 +218,8 @@
 
   <!-- 파이어베이스 및 실시간 토론 로직 스크립트 -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
-    import { getDatabase, ref, push, remove, onValue } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCL0mfecSYrkw1AZZVMyZ3c6qNlz79UBmw",
@@ -298,4 +298,122 @@
         const key = `${note.topic}-${note.opinion}`;
         if (counts.hasOwnProperty(key)) counts[key]++;
 
-        const container = document
+        const container = document.getElementById(`notes-${key}`);
+        if (container) {
+          const noteEl = document.createElement('div');
+          noteEl.className = `sticky-note ${note.opinion}`;
+          noteEl.innerHTML = `
+            <div class="note-header">
+              <span class="note-author">${escapeHtml(note.author)}</span>
+              <button class="btn-delete" onclick="deleteNote('${note.id}')" title="삭제">✕</button>
+            </div>
+            <div class="note-content">${escapeHtml(note.content)}</div>
+          `;
+          container.appendChild(noteEl);
+        }
+      });
+
+      Object.keys(counts).forEach(key => {
+        const countEl = document.getElementById(`count-${key}`);
+        if (countEl) countEl.textContent = counts[key];
+      });
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
+</head>
+<body>
+
+  <div class="board-container">
+    <header>
+      <div class="title">📜 고려 말 조선 초 역사 토론 게시판</div>
+      <button class="btn-add" onclick="openModal()">+ 의견 남기기</button>
+    </header>
+
+    <main>
+      <!-- 주제 1: 요동 정벌 -->
+      <section class="topic-column">
+        <div class="topic-header">
+          <div class="topic-title">1. 요동 정벌</div>
+          <div class="topic-stats">
+            <span>최영파(찬성): <span class="stat-green" id="count-t1-agree">0</span></span><span>|</span>
+            <span>이성계파(반대): <span class="stat-pink" id="count-t1-oppose">0</span></span>
+          </div>
+        </div>
+        <div class="opinion-split">
+          <div class="opinion-box"><div class="box-label agree">최영파 (찬성 - 연두)</div><div class="sticky-container" id="notes-t1-agree"></div></div>
+          <div class="opinion-box"><div class="box-label oppose">이성계파 (반대 - 분홍)</div><div class="sticky-container" id="notes-t1-oppose"></div></div>
+        </div>
+      </section>
+
+      <!-- 주제 2: 위화도 회군 -->
+      <section class="topic-column">
+        <div class="topic-header">
+          <div class="topic-title">2. 위화도 회군</div>
+          <div class="topic-stats">
+            <span>회군 찬성: <span class="stat-green" id="count-t2-agree">0</span></span><span>|</span>
+            <span>회군 반대: <span class="stat-pink" id="count-t2-oppose">0</span></span>
+          </div>
+        </div>
+        <div class="opinion-split">
+          <div class="opinion-box"><div class="box-label agree">회군 찬성 (연두)</div><div class="sticky-container" id="notes-t2-agree"></div></div>
+          <div class="opinion-box"><div class="box-label oppose">회군 반대 (분홍)</div><div class="sticky-container" id="notes-t2-oppose"></div></div>
+        </div>
+      </section>
+
+      <!-- 주제 3: 조선 건국 -->
+      <section class="topic-column">
+        <div class="topic-header">
+          <div class="topic-title">3. 조선 건국</div>
+          <div class="topic-stats">
+            <span>정도전파(찬성): <span class="stat-green" id="count-t3-agree">0</span></span><span>|</span>
+            <span>정몽주파(반대): <span class="stat-pink" id="count-t3-oppose">0</span></span>
+          </div>
+        </div>
+        <div class="opinion-split">
+          <div class="opinion-box"><div class="box-label agree">정도전파 (찬성 - 연두)</div><div class="sticky-container" id="notes-t3-agree"></div></div>
+          <div class="opinion-box"><div class="box-label oppose">정몽주파 (반대 - 분홍)</div><div class="sticky-container" id="notes-t3-oppose"></div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 의견 작성 모달 -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card">
+      <h2>의견 작성하기</h2>
+      <form id="noteForm" onsubmit="saveNote(event)">
+        <div class="form-group">
+          <label for="author">이름 (또는 닉네임)</label>
+          <input type="text" id="author" placeholder="이름을 입력하세요" required>
+        </div>
+        <div class="form-group">
+          <label for="topicSelect">주제 선택</label>
+          <select id="topicSelect" required>
+            <option value="t1">1. 요동 정벌</option>
+            <option value="t2">2. 위화도 회군</option>
+            <option value="t3">3. 조선 건국</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="opinionSelect">입장 선택</label>
+          <select id="opinionSelect" required>
+            <option value="agree">찬성</option>
+            <option value="oppose">반대</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="content">그렇게 생각한 까닭</label>
+          <textarea id="content" placeholder="이유와 생각을 자유롭게 적어주세요." required></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="closeModal()">취소</button>
+          <button type="submit" class="btn-submit">등록하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
